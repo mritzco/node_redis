@@ -604,7 +604,16 @@ function try_callback(callback, reply) {
         }
     }
 }
-
+function reply_to_array(reply) {
+    var i;
+    for (i = 0; i < reply.length; i++) {
+        if (Array.isArray(reply[i])) {
+            reply_to_array(reply[i]);
+        } else if (Buffer.isBuffer(reply[i])) {
+            reply[i] = reply[i].toString();
+        }
+    }
+}
 // hgetall converts its replies to an Object.  If the reply is empty, null is returned.
 function reply_to_object(reply) {
     var obj = {}, j, jl, key, val;
@@ -630,11 +639,7 @@ function reply_to_strings(reply) {
     }
 
     if (Array.isArray(reply)) {
-        for (i = 0; i < reply.length; i++) {
-            if (reply[i] !== null && reply[i] !== undefined) {
-                reply[i] = reply[i].toString();
-            }
-        }
+        reply_to_array(reply);
         return reply;
     }
 
