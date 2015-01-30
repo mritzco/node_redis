@@ -1,3 +1,14 @@
+About this fork
+=====================
+This is a fork of node_redis with a fix on array parsing, unfortunately the code was never pulled.
+
+Issue:
+    https://github.com/mranney/node_redis/issues/402
+The fix and pull request was implemented by: 
+    https://github.com/dayananda-n/node_redis
+
+Forked to have a trusted source for npm install
+
 redis - a node.js redis client
 ===========================
 
